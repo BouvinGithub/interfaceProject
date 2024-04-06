@@ -1,5 +1,5 @@
 package edu.union.adt.graph;
-import java.util.linkedlist;
+import java.util.LinkedList;
 
 /**
  * A vertex on a graph. It contains any edges that
@@ -9,18 +9,55 @@ import java.util.linkedlist;
  * @version 4/6/2024
  */
 
-public class Vertex<V>
-{
-  private <V> source;
+public class Vertex<V> {
+  private V source;
   private int degree;
   private LinkedList<V> edges;
 
-/**
- * constructor
- */
-  public Vertext(V source) {
+ /**
+  * constructor
+  */
+  public Vertex(V source) {
     source = source;
     degree = 0;
-    edges = new LinkedList;
+    edges = new LinkedList();
   }
+
+  /**
+   * addes an edge to this vertex from itself to endVertex
+   * does nothing if there is already an edge to endVertex
+   * @param endVertex the end vertex of the edge to be added
+   */
+   public void addEdge(V endVertex) {
+     if (!this.hasEdge(endVertex)) {
+       edges.add(endVertex);
+       degree++;
+     }
+   }
+
+   /**
+    * @return true if there is an edge starting at the source and ending
+    * at end, false otherwise.
+    */
+    public boolean hasEdge(V endVertex) {
+      return edges.contains(endVertex);
+    }
+
+
+  /**
+   * @return the source of the vertex
+   */
+   public V getSource() {
+     return source;
+   }
+
+   /**
+    * @return the degree of the vertex
+    */
+    public int getDegree() {
+      return degree;
+    }
+
+
+
 }
