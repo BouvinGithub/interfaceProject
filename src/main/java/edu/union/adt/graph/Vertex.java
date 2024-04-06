@@ -9,7 +9,6 @@ import java.lang.StringBuilder;
  * @author Grant Bouvin
  * @version 4/6/2024
  */
-
 public class Vertex<V> {
   private V source;
   private int degree;
@@ -25,9 +24,9 @@ public class Vertex<V> {
     edges = new LinkedList();
   }
 
-  /**
-   * @return a string representation of this object
-   */
+ /**
+  * @return a string representation of this object
+  */
   public String toString() {
     StringBuilder toReturn = new StringBuilder(source+":");
     if (degree>0) {
@@ -41,48 +40,68 @@ public class Vertex<V> {
     return toReturn.toString();
   }
 
-  /**
-   * adds an edge to this vertex from itself to vertex from,
-   * does nothing if there is already an edge there.
-   * @param from the end vertex of the edge to be added
-   */
-   public void addEdge(V from) {
-     if (!this.hasEdge(from)) {
-       edges.add(from);
-       degree++;
-     }
-   }
-
-   /**
-    * @return true if there is an edge starting at the source and ending
-    * at vertex from, false otherwise.
-    */
-    public boolean hasEdge(V from) {
-      return edges.contains(from);
+ /**
+  * @return true if this vertex is equal to anotherObject, false otherwwise
+  * (they are equal if they are both instances of the Vertex class and have the same source)
+  */
+  public boolean equals(Object anotherObject) {
+    if (anotherObject instanceof Vertex) {
+      if (getSource() == (Vertex)anotherObject.getSource){
+        return true;
+      }
     }
+    else return false;
+  }
 
-    /**
-     * @return true if this vertex is adjacent to the given vertex from,
-     * false otherwise.
-     */
-    public boolean isAdjacent(V from) {
-      return edges.contains(from);
+ /**
+  * adds an edge to this vertex from itself to vertex to,
+  * does nothing if there is already an edge there.
+  * @param to the end vertex of the edge to be added
+  */
+  public void addEdge(V to) {
+    if (!this.hasEdge(to)) {
+      edges.add(to);
+      degree++;
     }
+  }
+
+ /**
+  * @return true if given source is the same as my source, false otherwise
+  */
+  public boolean fromSource(V source) {
+    return source == getSource();
+  }
 
 
-  /**
-   * @return the source of the vertex
-   */
-   public V getSource() {
-     return source;
-   }
+ /**
+  * @return true if there is an edge starting at the source and ending
+  * at vertex to, false otherwise.
+  */
+  public boolean hasEdge(V to) {
+    return edges.contains(to);
+  }
 
-   /**
-    * @return the degree of the vertex
-    */
-    public int getDegree() {
-      return degree;
-    }
+ /**
+  * @return true if this vertex is adjacent to the given vertex from,
+  * false otherwise.
+  */
+  public boolean isAdjacent(V from) {
+    return edges.contains(from);
+  }
+
+ /**
+  * @return the source of the vertex
+  */
+  public V getSource() {
+    return source;
+  }
+
+ /**
+  * @return the degree of the vertex
+  */
+  public int getDegree() {
+    return degree;
+  }
 
 
 
