@@ -1,5 +1,5 @@
 package edu.union.adt.graph;
-
+import java.util.ArrayList;
 /**
  * A graph that establishes connections (edges) between objects of
  * (parameterized) type V (vertices).  The edges are directed.  An
@@ -13,16 +13,24 @@ package edu.union.adt.graph;
  * parameterized with a vertex type V instead of assuming String
  * vertices.
  *
- * @author Aaron G. Cass
- * @version 1
+ * @author Grant Bouvin
+ * @version 4/6/2024
  */
-public class Graph<V>
-{
+public class Graph<V> {
+
+    private final int DEFAULT_CAPACITY = 10;
+    private ArrayList<Vertex> vertexList;
+    private int verticies;
+    private int edges;
+
     /**
      * Create an empty graph.
      */
     public Graph()
     {
+      vertexList = new ArrayList<Vertex>(DEFAULT_CAPACITY);
+      verticies = 0;
+      edges = 0;
     }
 
     /**
@@ -30,7 +38,7 @@ public class Graph<V>
      */
     public int numVertices()
     {
-        return 0;
+        return verticies;
     }
 
     /**
@@ -38,7 +46,7 @@ public class Graph<V>
      */
     public int numEdges()
     {
-        return 0;
+        return edges;
     }
 
     /**
@@ -65,6 +73,7 @@ public class Graph<V>
      */
     public void addEdge(V from, V to)
     {
+      //if (vertexList.contains(from))
     }
 
     /**

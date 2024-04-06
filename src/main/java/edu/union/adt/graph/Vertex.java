@@ -1,5 +1,6 @@
 package edu.union.adt.graph;
 import java.util.LinkedList;
+import java.lang.StringBuilder;
 
 /**
  * A vertex on a graph. It contains any edges that
@@ -15,7 +16,8 @@ public class Vertex<V> {
   private LinkedList<V> edges;
 
  /**
-  * constructor
+  * Create a vertex
+  * @param source the origin of the vertex
   */
   public Vertex(V source) {
     source = source;
@@ -24,23 +26,47 @@ public class Vertex<V> {
   }
 
   /**
-   * addes an edge to this vertex from itself to endVertex
-   * does nothing if there is already an edge to endVertex
-   * @param endVertex the end vertex of the edge to be added
+   * @return a string representation of this object
    */
-   public void addEdge(V endVertex) {
-     if (!this.hasEdge(endVertex)) {
-       edges.add(endVertex);
+  public String toString() {
+    StringBuilder toReturn = new StringBuilder(source+":");
+    if (degree>0) {
+      toReturn.append(" ");
+      for (V vertex : edges) {
+        toReturn.append(vertex);
+        toReturn.append(", ");
+      }
+      toReturn.delete(toReturn.length()-2, toReturn.length());
+    }
+    return toReturn.toString();
+  }
+
+  /**
+   * adds an edge to this vertex from itself to vertex from,
+   * does nothing if there is already an edge there.
+   * @param from the end vertex of the edge to be added
+   */
+   public void addEdge(V from) {
+     if (!this.hasEdge(from)) {
+       edges.add(from);
        degree++;
      }
    }
 
    /**
     * @return true if there is an edge starting at the source and ending
-    * at end, false otherwise.
+    * at vertex from, false otherwise.
     */
-    public boolean hasEdge(V endVertex) {
-      return edges.contains(endVertex);
+    public boolean hasEdge(V from) {
+      return edges.contains(from);
+    }
+
+    /**
+     * @return true if this vertex is adjacent to the given vertex from,
+     * false otherwise.
+     */
+    public boolean isAdjacent(V from) {
+      return edges.contains(from);
     }
 
 
