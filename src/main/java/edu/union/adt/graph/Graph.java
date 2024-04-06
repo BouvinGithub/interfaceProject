@@ -21,7 +21,7 @@ public class Graph<V>
     /**
      * Create an empty graph.
      */
-    public Graph() 
+    public Graph()
     {
     }
 
