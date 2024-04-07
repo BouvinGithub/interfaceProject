@@ -1,10 +1,14 @@
 package edu.union.adt.graph;
 import java.util.ArrayList;
+import java.lang.RuntimeException;
+import java.util.Stack;
+import java.lang.StringBuilder;
+
 /**
  * A graph that establishes connections (edges) between objects of
  * (parameterized) type V (vertices).  The edges are directed.  An
  * undirected edge between u and v can be simulated by two edges: (u,
- * v) and (v, u).
+ * v) and (v, u).return "";
  *
  * The API is based on one from
  *     http://introcs.cs.princeton.edu/java/home/
@@ -26,8 +30,7 @@ public class Graph<V> {
    /**
     * Create an empty graph.
     */
-    public Graph()
-    {
+    public Graph() {
        vertexList = new ArrayList<Vertex>(DEFAULT_CAPACITY);
        verticies = 0;
        edges = 0;
@@ -36,16 +39,14 @@ public class Graph<V> {
    /**
     * @return the number of vertices in the graph.
     */
-    public int numVertices()
-    {
+    public int numVertices() {
         return verticies;
     }
 
    /**
     * @return the number of edges in the graph.
     */
-    public int numEdges()
-    {
+    public int numEdges() {
         return edges;
     }
 
@@ -57,8 +58,7 @@ public class Graph<V> {
     * @param vertex the vertex whose degree we want.
     * @return the degree of vertex 'vertex'
     */
-    public int degree(V vertex)
-    {
+    public int degree(V vertex) throws RuntimeException {
         return getVertex(vertex).getDegree();
     }
 
@@ -71,15 +71,17 @@ public class Graph<V> {
     * @param from the source vertex for the added edge
     * @param to the destination vertex for the added edge
     */
-    public void addEdge(V from, V to)
-    {
-        if (!this.containsVertex(from)) {
+    public void addEdge(V from, V to) {
+        if (!this.contains(from)) {
             addVertex(from);
+            verticies++;
         }
-        if (!this.containsVertex(to)) {
-            addvertex(to)
+        if (!this.contains(to)) {
+            addVertex(to);
+            verticies++;
         }
         getVertex(from).addEdge(to);
+        edges++;
     }
 
    /**
@@ -89,17 +91,25 @@ public class Graph<V> {
     *
     * @param vertex the vertex to add
     */
-    public void addVertex(V vertex){
-        if (this.containsVertex(vertex))
+    public void addVertex(V vertex) {
+        if (!this.contains(vertex)) {
+          addVertex(vertex);
+          verticies++;
+        }
     }
 
    /**
     * @return the an iterable collection for the set of vertices of
     * the graph.
     */
-    public Iterable<V> getVertices()
-    {
-        return null;
+    public Iterable<V> getVertices() {
+        Stack toReturn = new Stack();
+        if (!isEmpty()) {
+          for (Vertex vertex : vertexList) {
+            toReturn.push(vertex.getSource());
+          }
+        }
+        return toReturn;
     }
 
    /**
@@ -115,9 +125,16 @@ public class Graph<V> {
     * vertex.  If 'from' is not a vertex in the graph, returns an
     * empty iterator.
     */
-    public Iterable<V> adjacentTo(V from)
-    {
-        return null;
+    public Iterable<V> adjacentTo(V from) {
+      Stack toReturn = new Stack();
+      if (!isEmpty()) {
+        for (Vertex vertex : vertexList) {
+          if (vertex.isAdjacent(from)) {
+            toReturn.push(vertex.getSource());
+          }
+        }
+      }
+      return toReturn;
     }
 
    /**
@@ -126,9 +143,15 @@ public class Graph<V> {
     * @param vertex a vertex
     * @return true iff 'vertex' is a vertex in the graph.
     */
-    public boolean contains(V vertex)
-    {
-        return false;
+    public boolean contains(V vertex) {
+      if (!isEmpty()) {
+        for(Vertex vert : vertexList) {
+            if (vert.fromSource(vertex)) {
+                return true;
+            }
+        }
+      }
+      return false;
     }
 
    /**
@@ -142,9 +165,13 @@ public class Graph<V> {
     * vertices are not vertices in the graph, then there is no edge
     * between them.
     */
-    public boolean hasEdge(V from, V to)
-    {
-        return false;
+    public boolean hasEdge(V from, V to) {
+      if (!isEmpty()) {
+        if (this.contains(from) && this.contains(to)) {
+          return getVertex(from).hasEdge(to);
+        }
+      }
+      return false;
     }
 
    /**
@@ -177,38 +204,46 @@ public class Graph<V> {
     *
     * @return the string representation of the graph
     */
-    public String toString()
-    {
+    public String toString() {
+      if (isEmpty()) {
         return "";
-    }
-
-   /**
-    * @return true if this graph has the vertex vert, false otherwise
-    */
-    private boolean containsVertex(V vert) {
+      }
+      else {
+        StringBuilder toReturn = new StringBuilder();
         for(Vertex vertex : vertexList) {
-            if (vertex.fromSource(vert)) {
-                return true;
-            }
+          toReturn.append(vertex.toString());
+          toReturn.append("\n");
         }
-        return false;
+        toReturn.deleteCharAt(toReturn.length()-1);
+        return toReturn.toString();
+      }
+
     }
 
    /**
-    * gets the vertex object that this graph contains this will return
-    * null if this graph does not have the specified vertex
+    * gets the Vertex object that this graph contains of source vert
     *
-    * @param vert the source of the vertex object
-    * @return the Vertex object
+    * @param vert the source of the Vertex object
+    * @return the Vertex object, null if there is no Vertex object
+    * of source vert
     */
     private Vertex getVertex(V vert) {
-        for(Vertex vertex : vertexList) {
-            if (vertex.fromSource(vert)) {
-                return vertex;
-            }
-        }
-        return null;
+      if (!isEmpty()) {
+          for(Vertex vertex : vertexList) {
+              if (vertex.fromSource(vert)) {
+                  return vertex;
+              }
+          }
+      }
+      return null;
     }
+
+    /**
+     * @return true if this graph has no verticies, false otherwise
+     */
+     private boolean isEmpty() {
+       return numVertices()==0;
+     }
 
 
 }

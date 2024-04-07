@@ -44,14 +44,15 @@ public class Vertex<V> {
   * @return true if this vertex is equal to anotherObject, false otherwwise
   * (they are equal if they are both instances of the Vertex class and have the same source)
   */
+  /*
   public boolean equals(Object anotherObject) {
     if (anotherObject instanceof Vertex) {
-      if (getSource() == (Vertex)anotherObject.getSource){
+      if (getSource() == ((Vertex)anotherObject).getSource()){
         return true;
       }
     }
     else return false;
-  }
+  }*/
 
  /**
   * adds an edge to this vertex from itself to vertex to,
@@ -82,11 +83,11 @@ public class Vertex<V> {
   }
 
  /**
-  * @return true if this vertex is adjacent to the given vertex from,
+  * @return true if this vertex is adjacent to the given source vert,
   * false otherwise.
   */
-  public boolean isAdjacent(V from) {
-    return edges.contains(from);
+  public boolean isAdjacent(V source) {
+    return edges.contains(source);
   }
 
  /**
