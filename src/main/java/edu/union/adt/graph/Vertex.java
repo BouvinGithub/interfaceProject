@@ -16,12 +16,12 @@ public class Vertex<V> {
 
  /**
   * Create a vertex
-  * @param source the origin of the vertex
+  * @param from the origin of the vertex
   */
-  public Vertex(V source) {
-    source = source;
+  public Vertex(V from) {
+    source = from;
     degree = 0;
-    edges = new LinkedList();
+    edges = new LinkedList<>();
   }
 
  /**

@@ -11,7 +11,7 @@ import java.lang.StringBuilder;
  * v) and (v, u).return "";
  *
  * The API is based on one from
- *     http://introcs.cs.princeton.edu/java/home/
+ *     <a href="http://introcs.cs.princeton.edu/java/home/">...</a>
  *
  * Some method names have been changed, and the Graph type is
  * parameterized with a vertex type V instead of assuming String
@@ -22,17 +22,17 @@ import java.lang.StringBuilder;
  */
 public class Graph<V> {
 
-    private final int DEFAULT_CAPACITY = 10;
-    private ArrayList<Vertex> vertexList;
-    private int verticies;
+    private ArrayList<Vertex<V>> vertexList;
+    private int vertices;
     private int edges;
 
    /**
     * Create an empty graph.
     */
     public Graph() {
-       vertexList = new ArrayList<Vertex>(DEFAULT_CAPACITY);
-       verticies = 0;
+        final int DEFAULT_CAPACITY = 10;
+        vertexList = new ArrayList<>(DEFAULT_CAPACITY);
+       vertices = 0;
        edges = 0;
     }
 
@@ -40,7 +40,7 @@ public class Graph<V> {
     * @return the number of vertices in the graph.
     */
     public int numVertices() {
-        return verticies;
+        return vertices;
     }
 
    /**
@@ -74,11 +74,11 @@ public class Graph<V> {
     public void addEdge(V from, V to) {
         if (!this.contains(from)) {
             addVertex(from);
-            verticies++;
+            vertices++;
         }
         if (!this.contains(to)) {
             addVertex(to);
-            verticies++;
+            vertices++;
         }
         getVertex(from).addEdge(to);
         edges++;
@@ -93,19 +93,19 @@ public class Graph<V> {
     */
     public void addVertex(V vertex) {
         if (!this.contains(vertex)) {
-          addVertex(vertex);
-          verticies++;
+            vertexList.add(new Vertex<V>(vertex));
+            vertices++;
         }
     }
 
    /**
-    * @return the an iterable collection for the set of vertices of
+    * @return an iterable collection for the set of vertices of
     * the graph.
     */
     public Iterable<V> getVertices() {
-        Stack toReturn = new Stack();
+        Stack<V> toReturn = new Stack<>();
         if (!isEmpty()) {
-          for (Vertex vertex : vertexList) {
+          for (Vertex<V> vertex : vertexList) {
             toReturn.push(vertex.getSource());
           }
         }
@@ -126,9 +126,9 @@ public class Graph<V> {
     * empty iterator.
     */
     public Iterable<V> adjacentTo(V from) {
-      Stack toReturn = new Stack();
+      Stack<V> toReturn = new Stack<>();
       if (!isEmpty()) {
-        for (Vertex vertex : vertexList) {
+        for (Vertex<V> vertex : vertexList) {
           if (vertex.isAdjacent(from)) {
             toReturn.push(vertex.getSource());
           }
@@ -138,14 +138,14 @@ public class Graph<V> {
     }
 
    /**
-    * Tells whether or not a vertex is in the graph.
+    * Tells whether a vertex is in the graph.
     *
     * @param vertex a vertex
     * @return true iff 'vertex' is a vertex in the graph.
     */
     public boolean contains(V vertex) {
       if (!isEmpty()) {
-        for(Vertex vert : vertexList) {
+        for(Vertex<V> vert : vertexList) {
             if (vert.fromSource(vertex)) {
                 return true;
             }
@@ -210,7 +210,7 @@ public class Graph<V> {
       }
       else {
         StringBuilder toReturn = new StringBuilder();
-        for(Vertex vertex : vertexList) {
+        for(Vertex<V> vertex : vertexList) {
           toReturn.append(vertex.toString());
           toReturn.append("\n");
         }
@@ -227,9 +227,9 @@ public class Graph<V> {
     * @return the Vertex object, null if there is no Vertex object
     * of source vert
     */
-    private Vertex getVertex(V vert) {
+    private Vertex<V> getVertex(V vert) {
       if (!isEmpty()) {
-          for(Vertex vertex : vertexList) {
+          for(Vertex<V> vertex : vertexList) {
               if (vertex.fromSource(vert)) {
                   return vertex;
               }
@@ -247,3 +247,4 @@ public class Graph<V> {
 
 
 }
+
