@@ -224,15 +224,15 @@ public class Graph<V> {
      *
      *
      */
-    // public boolean equals(Object anotherObject){
-    //   if (!anotherObject.isInstance(Graph)) {
-    //     return false;
-    //   }
-    //   else {
-    //     Graph<?> otherGraph = (Graph<?>) anotherObject;
-    //
-    //   }
-    // }
+    public boolean equals(Graph<V> anotherGraph){
+      if (!anotherObject.isInstance(Graph)) {
+        return false;
+      }
+      else {
+        Graph<?> otherGraph = (Graph<?>) anotherObject;
+
+      }
+    }
 
    /**
     * gets the Vertex object that this graph contains of source vert
