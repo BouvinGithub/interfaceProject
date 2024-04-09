@@ -46,8 +46,8 @@ public class Vertex<V> {
   */
   /*
   public boolean equals(Object anotherObject) {
-    if (anotherObject instanceof Vertex) {
-      if (getSource() == ((Vertex)anotherObject).getSource()){
+    if (anotherObject instanceof Vertex<V>) {
+      if (getSource() == ((Vertex<V>)anotherObject).getSource()){
         return true;
       }
     }
