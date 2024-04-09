@@ -25,7 +25,6 @@ public class Graph<V> {
     private ArrayList<Vertex<V>> vertexList;
     private int vertices;
     private int edges;
-    private Class<V> type;
 
    /**
     * Create an empty graph.
@@ -35,7 +34,6 @@ public class Graph<V> {
       vertexList = new ArrayList<>(DEFAULT_CAPACITY);
       vertices = 0;
       edges = 0;
-      this.type = V
     }
 
    /**
@@ -260,11 +258,6 @@ public class Graph<V> {
      private boolean isEmpty() {
        return numVertices()==0;
      }
-
-     /**
-      *
-      */
-     private
 
 
 }
