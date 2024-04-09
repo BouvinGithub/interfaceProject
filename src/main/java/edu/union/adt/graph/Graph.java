@@ -25,15 +25,17 @@ public class Graph<V> {
     private ArrayList<Vertex<V>> vertexList;
     private int vertices;
     private int edges;
+    private Class<V> type;
 
    /**
     * Create an empty graph.
     */
     public Graph() {
-        final int DEFAULT_CAPACITY = 10;
-        vertexList = new ArrayList<>(DEFAULT_CAPACITY);
-       vertices = 0;
-       edges = 0;
+      final int DEFAULT_CAPACITY = 10;
+      vertexList = new ArrayList<>(DEFAULT_CAPACITY);
+      vertices = 0;
+      edges = 0;
+      this.type = V
     }
 
    /**
@@ -220,6 +222,20 @@ public class Graph<V> {
 
     }
 
+    /**
+     *
+     *
+     */
+    // public boolean equals(Object anotherObject){
+    //   if (!anotherObject.isInstance(Graph)) {
+    //     return false;
+    //   }
+    //   else {
+    //     Graph<?> otherGraph = (Graph<?>) anotherObject;
+    //
+    //   }
+    // }
+
    /**
     * gets the Vertex object that this graph contains of source vert
     *
@@ -244,6 +260,11 @@ public class Graph<V> {
      private boolean isEmpty() {
        return numVertices()==0;
      }
+
+     /**
+      *
+      */
+     private
 
 
 }
