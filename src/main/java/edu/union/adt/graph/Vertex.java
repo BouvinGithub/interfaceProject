@@ -44,12 +44,17 @@ public class Vertex<V> {
   * @return true if this vertex is equal to anotherObject, false otherwwise
   * (they are equal if they are both instances of the Vertex class and have the same source)
   */
-  // public boolean equals(Object anotherObject) {
-  //   if (anotherObject instanceof Vertex) {
-  //     Vertex<?> anotherVertex = (Vertex<?> anotherObject);
-  //     return getSource() == anotherVertex.getSource();
+  // public boolean equals(Vertex<V> anotherVertex) {
+  //   if(this.getSource() != anotherVertex.getSource()) {
+  //     return false;
   //   }
-  //   else return false;
+  //   else if (this.getDegree() != another.getDegree()) {
+  //     return false;
+  //   }
+  //   else {
+  //     for(V edge : edges)
+  //   }
+  //   }
   // }
 
  /**

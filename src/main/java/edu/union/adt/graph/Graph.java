@@ -224,15 +224,42 @@ public class Graph<V> {
      *
      *
      */
-    public boolean equals(Graph<V> anotherGraph){
-      if (!anotherObject.isInstance(Graph)) {
+    public boolean equals(Object anotherObject){
+      if (!(anotherObject instanceof Graph)) {
         return false;
       }
       else {
-        Graph<?> otherGraph = (Graph<?>) anotherObject;
-
+        Graph anotherGraph = (Graph) anotherObject;
+        if (this.numVertices() != anotherGraph.numVertices()) {
+          return false;
+        }
+        else if (this.numEdges() != anotherGraph.numEdges()) {
+          return false;
+        }
+        else {
+          
+        }
       }
+
     }
+    //   if (this.numVertices() != anotherGraph.numVertices()) {
+    //     return false;
+    //   }
+    //   else if (this.numEdges() != anotherGraph.numEdges()) {
+    //     return false;
+    //   }
+    //   else {
+    //     Iterable<V> container = anotherGraph.getVertices();
+    //     for (V vertex : container) {
+    //       if (!this.contains(vertex)) {
+    //         return false;
+    //       }
+    //       else {
+    //         Iterable<V> edges = vertex.getEdges();
+    //       }
+    //     }
+    //   }
+    // }
 
    /**
     * gets the Vertex object that this graph contains of source vert
