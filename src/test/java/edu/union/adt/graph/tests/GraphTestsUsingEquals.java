@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.assertFalse;
 
+import edu.union.adt.graph.GraphFactory;
 import org.junit.Test;
 import org.junit.Ignore;
 import org.junit.Before;
@@ -23,9 +24,9 @@ public class GraphTestsUsingEquals
     @Before
     public void setUp()
     {
-        g = new Graph<String>();
-        g2 = new Graph<String>();
-        objectGraph = new Graph<Object>();
+        g = GraphFactory.<String>createGraph();
+        g2 = GraphFactory.<String>createGraph();
+        objectGraph = GraphFactory.<Object>createGraph();
     }
     
     @Test
@@ -77,6 +78,8 @@ public class GraphTestsUsingEquals
 
         assertEquals("Adding an existing edge has no effect",
                      g, g2);
+        System.out.println(g);
+        System.out.println(objectGraph);
         assertEquals("Adding an existing edge has no effect, "
                      + "even if the element types differ",
                      g, objectGraph);

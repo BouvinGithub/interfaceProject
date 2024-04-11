@@ -4,22 +4,10 @@ import java.lang.RuntimeException;
 import java.lang.StringBuilder;
 
 /**
- * A graph that establishes connections (edges) between objects of
- * (parameterized) type V (vertices).  The edges are directed.  An
- * undirected edge between u and v can be simulated by two edges: (u,
- * v) and (v, u).return "";
- * <p>
- * The API is based on one from
- *     <a href="http://introcs.cs.princeton.edu/java/home/">...</a>
- * <p>
- * Some method names have been changed, and the Graph type is
- * parameterized with a vertex type V instead of assuming String
- * vertices.
- *
- * I received help from Jason at the CS Help Desk on this project
+ * An implementation of the Graph interface using an AdjacencyList
  *
  * @author Grant Bouvin
- * @version 4/6/2024
+ * @version 4/11/2024
  */
 public class GraphAdjacencyList<V> implements Graph<V> {
 
@@ -257,6 +245,13 @@ public class GraphAdjacencyList<V> implements Graph<V> {
             biggerMap.putAll(this.vertexList);
             vertexList = biggerMap;
         }
+    }
+
+    /**
+     * @return the capacity of this graph
+     */
+    public int getCapacity() {
+        return capacity;
     }
 
     /**
